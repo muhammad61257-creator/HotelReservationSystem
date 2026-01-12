@@ -28,7 +28,7 @@ public class App {
 
             // 4. Perform Check-in
             Address addr = new Address("Main Street", "Karachi");
-            myChain.checkInGuest(myRes, "Syed Saad Luqman", addr);
+            myChain.checkInGuest(myRes, "Muhammad Altamash", addr);
             
             System.out.println("Guest checked in to Room: " + r1.getNumber());
             System.out.println("Current Occupant: " + r1.getOccupant().getName());
