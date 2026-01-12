@@ -1,7 +1,3 @@
-This `README.md` file is professionally structured to showcase your work for your CCP. It specifically highlights the **WP (Work Package)** elements your instructor is looking for, such as defensive programming and the AAA testing pattern.
-
----
-
 # Hotel Reservation System
 
 A robust Java-based domain model for managing hotel chains, rooms, and reservations. This project demonstrates high-quality software engineering principles, including **Encapsulation**, **Defensive Programming (WP7)**, and **Interdependence (WP8)**.
@@ -92,5 +88,3 @@ The test suite ensures the system handles conflicting requirements by:
 * Ensuring 100% model coverage across all 12+ domain entities.
 
 ---
-
-**Now that your README is ready, would you like me to help you summarize the "Interdependence (WP8)" relationships to include in your final 4-page report?**
