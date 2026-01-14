@@ -10,6 +10,10 @@ public class Hotel {
         this.rooms = new ArrayList<>();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void addRoom(Room room) {
         rooms.add(room);
     }
