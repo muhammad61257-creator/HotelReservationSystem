@@ -1,49 +1,53 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 public class HotelChain {
-    private String id;
-    private List<Hotel> hotels;
-    private List<Reservation> activeReservations;
+    private String name;
+    private List<Hotel> hotels = new ArrayList<>();
+    private List<Reservation> activeReservations = new ArrayList<>();
 
-    public HotelChain(String id) {
-        this.id = id;
-        this.hotels = new ArrayList<>();
-        this.activeReservations = new ArrayList<>();
+    public HotelChain(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Hotel Chain name cannot be empty.");
+        }
+        this.name = name;
     }
 
-    // UML Operation: +makeReservation() 
+    // This method uses the 'hotels' list, clearing the warning
+    public void addHotel(Hotel hotel) {
+        if (hotel == null) throw new IllegalArgumentException("Hotel cannot be null");
+        this.hotels.add(hotel);
+    }
+
+    // This method uses the 'name' field, clearing the warning
+    public String getName() {
+        return name;
+    }
+
+    // Matches UML: +createReserverPayer(Identity, CreditCard)
+    public ReserverPayer createReserverPayer(Identity id, CreditCard card) {
+        return new ReserverPayer(id, card);
+    }
+
+    // Matches UML: +makeReservation()
     public Reservation makeReservation(Hotel hotel, Date start, Date end, ReserverPayer payer) {
-        List<Room> availableRooms = hotel.available(); 
-        
+        List<Room> availableRooms = hotel.available();
         if (availableRooms.isEmpty()) {
-            throw new IllegalStateException("No rooms available in this hotel.");
+            throw new IllegalStateException("No rooms available in " + hotel.getName());
         }
 
-        // Logic: Pick the first available room
         Room roomToBook = availableRooms.get(0);
-        int resId = activeReservations.size() + 1;
+        int reservationId = activeReservations.size() + 1;
         
-        Reservation newRes = new Reservation(resId, start, end, payer, roomToBook);
-        activeReservations.add(newRes);
-        return newRes;
+        Reservation res = new Reservation(reservationId, start, end, payer, roomToBook);
+        activeReservations.add(res);
+        return res;
     }
 
-    // UML Operation: +checkInGuest() 
-    public void checkInGuest(Reservation reservation, String guestName, Address address) {
-        // Defensive: Ensure reservation exists [cite: 25]
-        if (reservation == null) return;
-        
-        Room room = reservation.getAssignedRoom();
-        room.createGuest(guestName, address); // Links Guest to Room 
-        System.out.println("Guest " + guestName + " checked into room.");
-    }
-
-    // UML Operation: +checkOutGuest() 
-    public void checkOutGuest(Room room) {
-        // Logic: Logic to clear the room (WP8 Interdependence) 
-        // In a real system, you'd nullify the occupant here
-        System.out.println("Guest checked out of room.");
+    public void checkInGuest(Reservation res, String guestName, Address addr) {
+        if (res != null) {
+            res.getAssignedRoom().createGuest(guestName, addr);
+        }
     }
 }

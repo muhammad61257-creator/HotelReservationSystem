@@ -1,16 +1,35 @@
 public class Room {
-    private int number;
-    private Guest occupied; // Points to the Guest currently in the room 
+    private final Integer number;
+    private RoomType roomType;
+    private Guest occupant; // Association: 0..1 occupied 
 
-    public Room(int number) {
+    public Room(Integer number) {
+        // Defensive: Ensure room number is valid [cite: 25]
+        if (number <= 0) throw new IllegalArgumentException("Room number must be positive");
         this.number = number;
     }
 
-    public void createGuest(String name, Address address) {
-        this.occupied = new Guest(name, address); // [cite: 66]
+    // This method links the Room to its RoomType 
+    public void setRoomType(RoomType type) {
+        if (type == null) throw new IllegalArgumentException("RoomType cannot be null");
+        this.roomType = type;
+    }
+
+    public void createGuest(String name, Address addr) {
+        // Defensive programming: prevent illegal states [cite: 26, 28]
+        if (this.occupant != null) throw new IllegalStateException("Room already occupied");
+        this.occupant = new Guest(name, addr); 
+    }
+
+    public void checkout() {
+        this.occupant = null; // Clears the association 
     }
 
     public boolean isAvailable() {
-        return occupied == null;
+        return occupant == null;
     }
+
+    public Guest getOccupant() { return occupant; }
+    public RoomType getRoomType() { return roomType; }
+    public Integer getNumber() { return number; }
 }

@@ -10,15 +10,14 @@ public class Hotel {
         this.rooms = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
+    // FIX: Change this to only take ONE argument: Room
     public void addRoom(Room room) {
-        rooms.add(room);
+        if (room == null) {
+            throw new IllegalArgumentException("Cannot add a null room."); // Defensive Programming
+        }
+        this.rooms.add(room);
     }
 
-    // Fulfills the +available() operation in UML 
     public List<Room> available() {
         List<Room> availableRooms = new ArrayList<>();
         for (Room room : rooms) {
@@ -28,4 +27,6 @@ public class Hotel {
         }
         return availableRooms;
     }
+
+    public String getName() { return name; }
 }
