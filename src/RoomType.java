@@ -1,12 +1,22 @@
 public class RoomType {
-    private final RoomKind kind;
-    private final Money cost;
+    private RoomKind kind;
+    private Money price;
 
-    public RoomType(RoomKind kind, Money cost) {
+    public RoomType(RoomKind kind, Money price) {
+        if (kind == null || price == null) {
+            throw new IllegalArgumentException("RoomKind and Price cannot be null.");
+        }
         this.kind = kind;
-        this.cost = cost;
+        this.price = price;
     }
 
-    public RoomKind getKind() { return kind; }
-    public Money getCost() { return cost; }
+    // Add this to fix the test error
+    public Money getPrice() {
+        return price;
+    }
+
+    // Add this to support full testing
+    public RoomKind getKind() {
+        return kind;
+    }
 }

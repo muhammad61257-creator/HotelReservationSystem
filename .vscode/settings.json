@@ -1,0 +1,10 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/media/altu/New Volume/collection/New folder/junit-platform-console-standalone-1.10.0-javadoc.jar"
+    ],
+    "java.project.sourcePaths": [
+        "src",
+        "test"
+    ]
+}
